@@ -5,8 +5,11 @@ import { sendVerificationEmail, sendWelcomeEmail } from "./email.service";
 import { v4 as uuidv4 } from "uuid";
 import { generateToken } from "../utils/jwt";
 import { IUser } from "../shared/interface";
+import { GenericResponse } from "../shared/types";
 
-export const registerUser = async (userData: IUser) => {
+export const registerUser = async (
+    userData: IUser
+): Promise<GenericResponse<any>> => {
     const { name, email, password } = userData;
 
     const existingUser = await User.findOne({ email }).select("-password");
@@ -27,10 +30,16 @@ export const registerUser = async (userData: IUser) => {
 
     await sendVerificationEmail(email!, verificationToken);
 
-    return user;
+    return {
+        success: true,
+        data: { user },
+        message: "User registered successfully",
+    };
 };
 
-export const verifyEmail = async (token: string) => {
+export const verifyEmail = async (
+    token: string
+): Promise<GenericResponse<any>> => {
     const user = await User.findOne({ verificationToken: token }).select(
         "-password"
     );
@@ -45,10 +54,16 @@ export const verifyEmail = async (token: string) => {
     await sendWelcomeEmail(user.email, user.name);
     const accessToken = generateToken(user._id as unknown as string);
 
-    return { user, accessToken };
+    return {
+        success: true,
+        data: { user, accessToken },
+        message: "Email verified successfully",
+    };
 };
 
-export const loginUser = async (userData: Partial<IUser>) => {
+export const loginUser = async (
+    userData: Partial<IUser>
+): Promise<GenericResponse<any>> => {
     const { email, password } = userData;
 
     const user = await User.findOne({ email }).select("+password");
@@ -61,10 +76,16 @@ export const loginUser = async (userData: Partial<IUser>) => {
     }
 
     const accessToken = generateToken(user._id as unknown as string);
-    return { user, accessToken };
+    return {
+        success: true,
+        data: { user, accessToken },
+        message: "Login successful",
+    };
 };
 
-export const resendVerification = async (email: string) => {
+export const resendVerification = async (
+    email: string
+): Promise<GenericResponse<any>> => {
     const user = await User.findOne({ email }).select("-password");
     if (!user) throw new AppError("User not found", 404);
     if (user.isVerified) throw new AppError("User already verified", 400);
@@ -76,5 +97,9 @@ export const resendVerification = async (email: string) => {
     await sendVerificationEmail(user.email, verificationToken);
     const accessToken = generateToken(user._id as unknown as string);
 
-    return { user, accessToken };
+    return {
+        success: true,
+        data: { user, accessToken },
+        message: "Verification email sent successfully",
+    };
 };
