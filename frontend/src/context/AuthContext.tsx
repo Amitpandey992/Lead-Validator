@@ -77,17 +77,19 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         restoreSession();
     }, []);
 
-    const handleAuthSuccess = async (data: any) => {
-        localStorage.setItem("user", JSON.stringify(data.user));
-        setUser(data.user);
-        setToken(data.accessToken);
-        saveToken(data.accessToken);
+    const handleAuthSuccess = async (payload: any) => {
+        const { user, accessToken } = payload.data; 
+
+        localStorage.setItem("user", JSON.stringify(user));
+        setUser(user);
+        setToken(accessToken);
+        saveToken(accessToken);
     };
 
     const login = async (email: string, password: string) => {
         try {
             const response = await authService.login(email, password);
-            handleAuthSuccess(response.data);
+            handleAuthSuccess(response);
             return response;
         } catch (error: any) {
             throw error;
@@ -97,7 +99,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const signup = async (name: string, email: string, password: string) => {
         try {
             const response = await authService.signup(name, email, password);
-            handleAuthSuccess(response.data);
+            handleAuthSuccess(response);
             return response;
         } catch (error: any) {
             throw error;
@@ -107,7 +109,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
     const verifyEmail = async (token: string) => {
         try {
             const response = await authService.verifyEmail(token);
-            handleAuthSuccess(response.data);
+            handleAuthSuccess(response);
             return response;
         } catch (error: any) {
             throw error;
@@ -118,6 +120,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         setToken(null);
         setUser(null);
         clearToken();
+        localStorage.removeItem("user");
         toast.info("Logged out");
     };
 

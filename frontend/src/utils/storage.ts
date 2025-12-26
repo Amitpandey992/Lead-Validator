@@ -1,4 +1,5 @@
 export const saveToken = (token: string) => {
+    if (!token) return;
     localStorage.setItem("accessToken", token);
 };
 

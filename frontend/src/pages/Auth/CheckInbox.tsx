@@ -1,4 +1,4 @@
-import { Mail, Send, Info } from "lucide-react";
+import { Mail, Info } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 
 export default function CheckInbox() {
@@ -50,19 +50,6 @@ export default function CheckInbox() {
                             />
                             <span>Can't find it? Check your spam folder.</span>
                         </div>
-                    </div>
-
-                    <div className="bg-[#111622] p-6 md:p-8 border-t border-brand-border text-center">
-                        <button className="w-full bg-brand-blue hover:cursor-pointer hover:bg-blue-600 text-white font-bold py-3.5 md:py-4 rounded-xl flex items-center justify-center gap-2 transition shadow-lg shadow-blue-500/20 active:scale-[0.98]">
-                            <Send size={18} /> Resend Verification Email
-                        </button>
-
-                        <button className="mt-6 text-xs md:text-sm text-brand-blue font-medium hover:underline">
-                            Entered the wrong email?{" "}
-                            <span className="font-bold">
-                                Change email address
-                            </span>
-                        </button>
                     </div>
                 </div>
             </div>

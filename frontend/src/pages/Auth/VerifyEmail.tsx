@@ -2,27 +2,36 @@ import { Loader2, ShieldCheck, Mail } from "lucide-react";
 import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useRef } from "react";
 
 export default function VerifyEmail() {
+    const hasVerified = useRef(false);
     const { verifyEmail } = useAuth();
     const url = new URLSearchParams(window.location.search);
     const token = url.get("token");
     const navigate = useNavigate();
 
     const handleVerifyEmail = async () => {
-        if (token) {
-            const response = await verifyEmail(token);
-            if (response.success) {
-                setTimeout(() => {
-                    navigate("/dashboard");
-                }, 4000);
+        try {
+            if (token) {
+                const response = await verifyEmail(token);
+                if (response.success) {
+                    setTimeout(() => {
+                        navigate("/dashboard");
+                    }, 4000);
+                }
             }
+        } catch (error: any) {
+            console.log(error);
         }
     };
 
     useEffect(() => {
+        if (!token || hasVerified.current) return;
+
+        hasVerified.current = true;
         handleVerifyEmail();
-    }, []);
+    }, [token]);
 
     if (!token) {
         return <Navigate to="/login" />;
