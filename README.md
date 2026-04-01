@@ -1,6 +1,6 @@
-# Velloko - Lead Validation System
+# Lead Validation System
 
-Velloko is a comprehensive full-stack application designed for managing and validating leads. It features a secure authentication system, a dashboard to manage lead sources, and a public API for validating leads from external sources.
+LeadValidator is a comprehensive full-stack application designed for managing and validating leads. It features a secure authentication system, a dashboard to manage lead sources, and a public API for validating leads from external sources.
 
 ## 🚀 Technology Stack
 
@@ -111,7 +111,7 @@ CLIENT_URL=http://localhost:5173          # Frontend URL
     ```
     The application will run on `http://localhost:5173`.
 
-## 📡 API Documentation
+## API Documentation
 
 ### Authentication (`/api/auth`)
 
@@ -170,7 +170,7 @@ To use the public validation endpoint from an external application, send a **POS
 }
 ```
 
-## 💻 Frontend Usage
+## Frontend Usage
 
 1.  **Login/Signup:** Create an account and log in.
 2.  **Dashboard Overview:** View aggregate stats of your leads.
