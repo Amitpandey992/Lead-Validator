@@ -26,7 +26,7 @@ LeadValidator is a comprehensive full-stack application designed for managing an
 ## 📂 Project Structure
 
 ```
-Velloko/
+Lead-validator/
 ├── backend/            # Express.js Backend
 │   ├── src/
 │   │   ├── config/     # Environment & DB config
@@ -59,7 +59,7 @@ Velloko/
 
     ```bash
     git clone <repository_url>
-    cd Velloko
+    cd Lead-validator
     ```
 
 2.  **Backend Setup:**
@@ -82,7 +82,7 @@ Create a `.env` file in the `backend` directory with the following variables:
 
 ```env
 PORT=5000
-MONGO_URI=mongodb://localhost:27017/velloko_db # Or your Atlas URI
+MONGO_URI=mongodb://localhost:27017/leadvalidator # Or your Atlas URI
 JWT_SECRET=your_super_secret_key
 NODE_ENV=development
 EMAIL_USER=your_email@gmail.com           # For sending verification emails
@@ -176,4 +176,4 @@ To use the public validation endpoint from an external application, send a **POS
 2.  **Dashboard Overview:** View aggregate stats of your leads.
 3.  **Source Management:** Create "Sources" (e.g., "Facebook Ads", "Landing Page"). Each source generates a unique **Source ID** and **API Key**.
 4.  **Leads:** View the table of leads collected. Use the filters to view leads by source.
-5.  **Integration:** Use the API Key and Source ID to send leads from your external sites to Velloko.
+5.  **Integration:** Use the API Key and Source ID to send leads from your external sites to Lead validator.
