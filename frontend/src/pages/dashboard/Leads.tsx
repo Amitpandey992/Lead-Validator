@@ -8,7 +8,7 @@ export default function Leads() {
     const { getLeads, getLeadsBySource, getUserSources } = useAuth();
 
     const [leads, setLeads] = useState<Lead[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [, setLoading] = useState<boolean>(false);
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [totalItems, setTotalItems] = useState<number>(0);

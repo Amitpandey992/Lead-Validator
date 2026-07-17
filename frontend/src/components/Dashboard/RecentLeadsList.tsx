@@ -4,7 +4,7 @@ import type { Lead } from "../../shared/types";
 
 export default function LeadsTable() {
     const { getLeads } = useAuth();
-    const [loading, setLoading] = useState(false);
+    const [, setLoading] = useState(false);
     const [leads, setLeads] = useState<Lead[]>([]);
 
     useEffect(() => {
